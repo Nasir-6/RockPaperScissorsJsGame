@@ -1,4 +1,4 @@
-inputCaseCorrector = (aString) => {
+correctInputCase = (aString) => {
     if ((typeof aString) === "string"){
         let firstLetterCapitilised = aString[0].toUpperCase();
         let restOfLetters = aString.slice(1).toLowerCase();
@@ -11,7 +11,7 @@ inputCaseCorrector = (aString) => {
 }
 
 
- computerPlays = () => {
+ getComputerSelection = () => {
     
     let cpuChooses = Math.floor(Math.random() * 3);
     if(cpuChooses === 0){
@@ -27,10 +27,10 @@ inputCaseCorrector = (aString) => {
 };
 
 
-playerSelection = () => {
+getPlayerSelection = () => {
     let playerChoice = window.prompt("Rock, Paper or Scissors? ");
     
-    let caseCorrectedInput = inputCaseCorrector(playerChoice);
+    let caseCorrectedInput = correctInputCase(playerChoice);
 
     switch(caseCorrectedInput) {
         case "Rock":
@@ -40,14 +40,14 @@ playerSelection = () => {
           break;
         default:
           alert("Not rock paper or scissors, please choose again!");
-          caseCorrectedInput = playerSelection();
+          caseCorrectedInput = getPlayerSelection();
       }
 
       return caseCorrectedInput;
 }
 
 
-playGame = (playerChoice, cpuChoice) => {
+playOneRound = (playerChoice, cpuChoice) => {
     console.log(playerChoice);
     console.log(cpuChoice)
 
@@ -95,22 +95,30 @@ playRoundOfFive = () =>{
     let playerScore = 0;
 
     for(round = 1; round<=5; round++){
-        result = playGame(playerSelection(), computerPlays())
-        if(result === 0){cpuScore++}
-        else if (result === 2){playerScore++}
-        console.log(
-            `Round ${round} Current Score
-            You  -  CPU
-            ${playerScore}    -  ${cpuScore}`)
+        
+        result = playOneRound(getPlayerSelection(), getComputerSelection())
+        
+        if(result === 0){
+            cpuScore++
+        }else if (result === 2){
+            playerScore++
+        }
+        showCurrentScore();
+
     }
     
-
-    
-    console.log(roundOfFiveResult(cpuScore, playerScore))
+    console.log(getFinalResult(cpuScore, playerScore))
 
 }
 
-roundOfFiveResult = (cpuScore, playerScore) => {
+showCurrentScore = (round, playerScore, cpuScore) => {
+    console.log(
+        `Round ${round} Current Score
+        You  -  CPU
+        ${playerScore}    -  ${cpuScore}`)
+};
+
+getFinalResult = (cpuScore, playerScore) => {
     let finalResult
     if(playerScore > cpuScore){
         finalResult = "You won " + playerScore + " - " + cpuScore 
