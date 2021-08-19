@@ -16,3 +16,32 @@ console.log("Hello World!");
 };
 
 
+
+
+// Player Selection
+
+playerSelection = () => {
+    let playerChoice = window.prompt("Rock, Paper or Scissor? ");
+    console.log(playerChoice)
+}
+
+
+
+// Take input in 
+// Case Correct it
+// Check if rock Paper or Scissors
+// Return player selection
+
+let inputCaseCorrector = (aString) => {
+    if ((typeof aString) === "string"){
+        let firstLetterCapitilised = aString[0].toUpperCase();
+        let restOfLetters = aString.slice(1).toLowerCase();
+        let caseCorrectedString = firstLetterCapitilised + restOfLetters 
+        return caseCorrectedString
+    } else{
+        return "This is not a string"
+    }
+
+}
+
+playerSelection();
