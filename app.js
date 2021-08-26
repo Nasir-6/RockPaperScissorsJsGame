@@ -61,11 +61,28 @@ playOneRound = (playerChoice, cpuChoice) => {
 }
 
 
-showCurrentScore = (round, playerScore, cpuScore) => {
+showCurrentScore = (round, playerScore, cpuScore, roundText) => {
     console.log(
         `Round ${round} Current Score
         You  -  CPU
-        ${playerScore}    -  ${cpuScore}`)
+        ${playerScore}    -  ${cpuScore}`);
+    
+    // Display score using HTML
+    const roundCount = document.querySelector('.roundCount');
+    roundCount.textContent = `Round: ${round}`;
+
+    const roundResult = document.querySelector('.roundResult');
+    roundResult.textContent = roundText;
+
+    const playerScoreUI = document.querySelector('.playerScore');
+    playerScoreUI.textContent = `Player: ${playerScore}`;
+
+    const cpuScoreUI = document.querySelector('.cpuScore');
+    cpuScoreUI.textContent = `CPU: ${cpuScore}`;
+
+
+
+
 };
 
 getFinalResult = (cpuScore, playerScore) => {
@@ -86,13 +103,12 @@ getFinalResult = (cpuScore, playerScore) => {
 
 // UI features
 
-
 const rockBtn = document.querySelector('.rock');
 rockBtn.addEventListener('click', () => {
     roundResult = playOneRound("Rock", getComputerSelection())
     console.log(roundResult);
 
-    updateScore(roundResult.userResult);
+    updateScore(roundResult.userResult, roundResult.text);
     
 
 });
@@ -102,7 +118,7 @@ paperBtn.addEventListener('click', () => {
     roundResult = playOneRound("Paper", getComputerSelection())
     console.log(roundResult);
 
-    updateScore(roundResult.userResult);
+    updateScore(roundResult.userResult, roundResult.text);
 });
 
 const scissorsBtn = document.querySelector('.scissors');
@@ -110,7 +126,7 @@ scissorsBtn.addEventListener('click', () => {
     roundResult = playOneRound("Scissors", getComputerSelection())
     console.log(roundResult);
 
-    updateScore(roundResult.userResult);
+    updateScore(roundResult.userResult, roundResult.text);
 });
 
 let result;
@@ -118,12 +134,12 @@ let cpuScore = 0;
 let playerScore = 0;
 let round = 0;
 
-updateScore = (userResult) => {
+updateScore = (userResult, roundText) => {
     round++;
     if(userResult === 0){
         cpuScore++
     }else if (userResult === 2){
         playerScore++
     }
-    showCurrentScore(round, playerScore, cpuScore);
+    showCurrentScore(round, playerScore, cpuScore, roundText);
 }
