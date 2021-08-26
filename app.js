@@ -133,4 +133,24 @@ getFinalResult = (cpuScore, playerScore) => {
     return finalResult
 }
 
-playRoundOfFive()
+//playRoundOfFive()
+
+// UI features
+
+// Get player input and consolelog it!!
+
+const rockBtn = document.querySelector('.rock');
+rockBtn.addEventListener('click', () => {
+    alert("Chose Rock")
+
+});
+
+const paperBtn = document.querySelector('.paper');
+paperBtn.addEventListener('click', () => {
+    alert("Chose Paper")
+});
+
+const scissorsBtn = document.querySelector('.scissors');
+scissorsBtn.addEventListener('click', () => {
+    alert("Chose Scissors")
+});
