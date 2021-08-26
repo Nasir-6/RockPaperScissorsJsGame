@@ -14,15 +14,10 @@ getComputerSelection = () => {
 };
 
 
-
-
 playOneRound = (playerChoice, cpuChoice) => {
-    console.log(playerChoice);
-    console.log(cpuChoice)
 
-    let userResult; // 0 = lose, 1 = draw, 2 = win
     const roundResult = {
-        userResult: -1,
+        userResult: -1,     // 0 = lose, 1 = draw, 2 = win, -1 = Error
         text: ""
     }
 
@@ -57,6 +52,7 @@ playOneRound = (playerChoice, cpuChoice) => {
     } else{
         console.log("Unexpected error");
         roundResult.userResult = 400
+        roundResult.text = "Unexpected Error"
     }
 
     // console.log(roundResult.text)
@@ -64,29 +60,6 @@ playOneRound = (playerChoice, cpuChoice) => {
     return roundResult;
 }
 
-
-playRoundOfFive = () =>{
-
-    let result;
-    let cpuScore = 0;
-    let playerScore = 0;
-
-    for(round = 1; round<=5; round++){
-        
-        result = playOneRound(getPlayerSelection(), getComputerSelection())
-        
-        if(result === 0){
-            cpuScore++
-        }else if (result === 2){
-            playerScore++
-        }
-        showCurrentScore();
-
-    }
-    
-    console.log(getFinalResult(cpuScore, playerScore))
-
-}
 
 showCurrentScore = (round, playerScore, cpuScore) => {
     console.log(
@@ -110,11 +83,9 @@ getFinalResult = (cpuScore, playerScore) => {
     return finalResult
 }
 
-//playRoundOfFive()
 
 // UI features
 
-// Get player input and consolelog it!!
 
 const rockBtn = document.querySelector('.rock');
 rockBtn.addEventListener('click', () => {
