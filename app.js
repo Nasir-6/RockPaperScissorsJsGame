@@ -1,17 +1,4 @@
-correctInputCase = (aString) => {
-    if ((typeof aString) === "string"){
-        let firstLetterCapitilised = aString[0].toUpperCase();
-        let restOfLetters = aString.slice(1).toLowerCase();
-        let caseCorrectedString = firstLetterCapitilised + restOfLetters 
-        return caseCorrectedString
-    } else{
-        return "This is not a string"
-    }
-
-}
-
-
- getComputerSelection = () => {
+getComputerSelection = () => {
     
     let cpuChooses = Math.floor(Math.random() * 3);
     if(cpuChooses === 0){
@@ -27,24 +14,6 @@ correctInputCase = (aString) => {
 };
 
 
-getPlayerSelection = () => {
-    let playerChoice = window.prompt("Rock, Paper or Scissors? ");
-    
-    let caseCorrectedInput = correctInputCase(playerChoice);
-
-    switch(caseCorrectedInput) {
-        case "Rock":
-        case "Paper":
-        case "Scissors":
-          
-          break;
-        default:
-          alert("Not rock paper or scissors, please choose again!");
-          caseCorrectedInput = getPlayerSelection();
-      }
-
-      return caseCorrectedInput;
-}
 
 
 playOneRound = (playerChoice, cpuChoice) => {
@@ -52,39 +21,47 @@ playOneRound = (playerChoice, cpuChoice) => {
     console.log(cpuChoice)
 
     let userResult; // 0 = lose, 1 = draw, 2 = win
-
-    if (playerChoice === cpuChoice){
-        console.log("Draw! You both chose " + playerChoice)
-        userResult = 1;
-
-    } else if (playerChoice === "Rock" && cpuChoice === "Paper"){
-        console.log("You lose! " + cpuChoice + " beats " + playerChoice)
-        userResult = 0;
-    } else if (playerChoice === "Paper" && cpuChoice === "Scissors"){
-        console.log("You lose! " + cpuChoice + " beats " + playerChoice)
-        userResult = 0;
-    
-    } else if (playerChoice === "Scissors" && cpuChoice === "Rock"){
-        console.log("You lose! " + cpuChoice + " beats " + playerChoice)
-        userResult = 0;
-
-    } else if (playerChoice === "Rock" && cpuChoice === "Scissors"){
-        console.log("You win! " + playerChoice + " beats " + cpuChoice)
-        userResult = 2;
-
-    } else if (playerChoice === "Paper" && cpuChoice === "Rock"){
-        console.log("You win! " + playerChoice + " beats " + cpuChoice)
-        userResult = 2;
-
-    } else if (playerChoice === "Scissors" && cpuChoice === "Paper"){
-        console.log("You win! " + playerChoice + " beats " + cpuChoice)
-        userResult = 2;
-    } else{
-        console.log("Unexpected error");
-        userResult = 400
+    const roundResult = {
+        userResult: -1,
+        text: ""
     }
 
-    return userResult;
+    if (playerChoice === cpuChoice){
+        roundResult.userResult = 1;
+        roundResult.text = "Draw! You both chose " + playerChoice;
+
+    } else if (playerChoice === "Rock" && cpuChoice === "Paper"){
+        roundResult.userResult = 0;
+        roundResult.text = "You lose! " + cpuChoice + " beats " + playerChoice;
+    
+    } else if (playerChoice === "Paper" && cpuChoice === "Scissors"){
+        roundResult.userResult = 0;
+        roundResult.text = "You lose! " + cpuChoice + " beats " + playerChoice;
+    
+    } else if (playerChoice === "Scissors" && cpuChoice === "Rock"){
+        roundResult.userResult = 0;
+        roundResult.text = "You lose! " + cpuChoice + " beats " + playerChoice;
+
+    } else if (playerChoice === "Rock" && cpuChoice === "Scissors"){
+        roundResult.userResult = 2;
+        roundResult.text = "You win! " + playerChoice + " beats " + cpuChoice;
+
+    } else if (playerChoice === "Paper" && cpuChoice === "Rock"){
+        roundResult.userResult = 2;
+        roundResult.text = "You win! " + playerChoice + " beats " + cpuChoice;
+
+    } else if (playerChoice === "Scissors" && cpuChoice === "Paper"){
+        roundResult.userResult = 2;
+        roundResult.text = "You win! " + playerChoice + " beats " + cpuChoice;
+
+    } else{
+        console.log("Unexpected error");
+        roundResult.userResult = 400
+    }
+
+    // console.log(roundResult.text)
+
+    return roundResult;
 }
 
 
@@ -141,16 +118,41 @@ getFinalResult = (cpuScore, playerScore) => {
 
 const rockBtn = document.querySelector('.rock');
 rockBtn.addEventListener('click', () => {
-    alert("Chose Rock")
+    roundResult = playOneRound("Rock", getComputerSelection())
+    console.log(roundResult);
+
+    updateScore(roundResult.userResult);
+    
 
 });
 
 const paperBtn = document.querySelector('.paper');
 paperBtn.addEventListener('click', () => {
-    alert("Chose Paper")
+    roundResult = playOneRound("Paper", getComputerSelection())
+    console.log(roundResult);
+
+    updateScore(roundResult.userResult);
 });
 
 const scissorsBtn = document.querySelector('.scissors');
 scissorsBtn.addEventListener('click', () => {
-    alert("Chose Scissors")
+    roundResult = playOneRound("Scissors", getComputerSelection())
+    console.log(roundResult);
+
+    updateScore(roundResult.userResult);
 });
+
+let result;
+let cpuScore = 0;
+let playerScore = 0;
+let round = 0;
+
+updateScore = (userResult) => {
+    round++;
+    if(userResult === 0){
+        cpuScore++
+    }else if (userResult === 2){
+        playerScore++
+    }
+    showCurrentScore(round, playerScore, cpuScore);
+}
