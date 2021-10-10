@@ -75,10 +75,10 @@ showCurrentScore = (round, playerScore, cpuScore, roundText) => {
 
 
     const playerScoreUI = document.querySelector('.playerScore');
-    playerScoreUI.textContent = `Player: ${playerScore}`;
+    playerScoreUI.textContent = `${playerScore}`;
 
     const cpuScoreUI = document.querySelector('.cpuScore');
-    cpuScoreUI.textContent = `CPU: ${cpuScore}`;
+    cpuScoreUI.textContent = `${cpuScore}`;
 
 };
 
