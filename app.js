@@ -13,7 +13,6 @@ getComputerSelection = () => {
 
 };
 
-
 playOneRound = (playerChoice, cpuChoice) => {
 
     const roundResult = {
@@ -62,11 +61,6 @@ playOneRound = (playerChoice, cpuChoice) => {
 
 
 showCurrentScore = (round, playerScore, cpuScore, roundText) => {
-    console.log(
-        `Round ${round} Current Score
-        You  -  CPU
-        ${playerScore}    -  ${cpuScore}`);
-    
     // Display score using HTML
     const roundCount = document.querySelector('.roundCount');
     roundCount.textContent = `Round: ${round}`;
@@ -80,10 +74,9 @@ showCurrentScore = (round, playerScore, cpuScore, roundText) => {
     const cpuScoreUI = document.querySelector('.cpuScore');
     cpuScoreUI.textContent = `CPU: ${cpuScore}`;
 
-
-
-
 };
+
+
 
 getFinalResult = (cpuScore, playerScore) => {
     let finalResult
@@ -106,28 +99,31 @@ getFinalResult = (cpuScore, playerScore) => {
 const rockBtn = document.querySelector('.rock');
 rockBtn.addEventListener('click', () => {
     roundResult = playOneRound("Rock", getComputerSelection())
-    console.log(roundResult);
-
     updateScore(roundResult.userResult, roundResult.text);
-    
-
 });
 
 const paperBtn = document.querySelector('.paper');
 paperBtn.addEventListener('click', () => {
     roundResult = playOneRound("Paper", getComputerSelection())
-    console.log(roundResult);
-
     updateScore(roundResult.userResult, roundResult.text);
 });
 
 const scissorsBtn = document.querySelector('.scissors');
 scissorsBtn.addEventListener('click', () => {
     roundResult = playOneRound("Scissors", getComputerSelection())
-    console.log(roundResult);
-
     updateScore(roundResult.userResult, roundResult.text);
 });
+
+
+const resetBtn = document.querySelector('.reset');
+resetBtn.addEventListener('click', () => {
+    cpuScore = 0;
+    playerScore = 0;
+    round = 0;
+    roundText  = "Game has been reset!"
+    showCurrentScore(round, playerScore, cpuScore, roundText)
+});
+
 
 let result;
 let cpuScore = 0;
