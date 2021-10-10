@@ -66,7 +66,13 @@ showCurrentScore = (round, playerScore, cpuScore, roundText) => {
     roundCount.textContent = `Round: ${round}`;
 
     const roundResult = document.querySelector('.roundResult');
-    roundResult.textContent = roundText;
+    if (round==5){
+        roundResult.textContent = getFinalResult(cpuScore,  playerScore);
+    }else{
+        roundResult.textContent = roundText;
+    }
+    
+
 
     const playerScoreUI = document.querySelector('.playerScore');
     playerScoreUI.textContent = `Player: ${playerScore}`;
@@ -89,6 +95,7 @@ getFinalResult = (cpuScore, playerScore) => {
     } else {
         finalResult = "uncaught error!! Your Score: " + playerScore + " CPU Score: " + cpuScore
     }
+    finalResult = finalResult + "! Please press reset to start again or continue to choose your weapon to continue!"
 
     return finalResult
 }
