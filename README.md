@@ -6,7 +6,7 @@ Play [here](https://nasir-6.github.io/rockPaperScissorsJsGame/).
 
 ## What I learnt:
 - How to plan a project
-- How to break down a project into smaller pieces
-- Debugging in the Js browser console
+- How to break down a project into smaller actionable tasks 
+- Debugging in the Chrome browser console
 - Using Js 
  
